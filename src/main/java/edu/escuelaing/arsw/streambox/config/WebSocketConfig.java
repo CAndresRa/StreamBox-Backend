@@ -14,14 +14,12 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        System.out.println("Llego aqui");
         config.enableSimpleBroker("/topic");
         config.setApplicationDestinationPrefixes("/app");
     }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        System.out.println("Llego aca");
         registry.addEndpoint("/websocket")
                 .setAllowedOrigins("*")
                 .withSockJS();
