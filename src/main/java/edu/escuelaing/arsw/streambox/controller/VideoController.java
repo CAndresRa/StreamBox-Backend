@@ -13,9 +13,8 @@ public class VideoController {
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("/changeurl")
     public String convertUrlToVideoId (@RequestParam(value="url") String url){
-        System.out.println(url);
-        System.out.println(videoService.convertUrlToVideoId(url));
-        return videoService.convertUrlToVideoId(url);
+        //return videoService.convertUrlToVideoId(url);
+        return url;
     }
 
 }
