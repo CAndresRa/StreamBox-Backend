@@ -23,9 +23,13 @@ public class VideoStompController {
     public void handleStateVideo(List<String> state){
         String newState = state.get(0);
         String roomName = state.get(1);
-        String newId = videoService.convertUrlToVideoId(newState);
-        System.out.println(newId);
-        msgt.convertAndSend("/topic/video." + roomName, newId);
+        if(newState.length() > 1) {
+            String newId = videoService.convertUrlToVideoId(newState);
+            System.out.println(newId);
+            msgt.convertAndSend("/topic/video." + roomName, newId);
+        } else {
+            msgt.convertAndSend("/topic/video." + roomName, newState);
+        }
     }
 
 }
