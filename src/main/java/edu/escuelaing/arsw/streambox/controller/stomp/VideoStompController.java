@@ -21,6 +21,7 @@ public class VideoStompController {
 
     @MessageMapping("/video")
     public void handleStateVideo(List<String> state){
+        
         String newState = state.get(0);
         String roomName = state.get(1);
         if(newState.length() > 1) {
