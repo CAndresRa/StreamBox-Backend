@@ -7,6 +7,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -25,10 +26,15 @@ public class VideoStompController {
         String roomName = state.get(1);
         if(newState.length() > 1) {
             String newId = videoService.convertUrlToVideoId(newState);
-            System.out.println(newId);
             msgt.convertAndSend("/topic/video." + roomName, newId);
         } else {
-            msgt.convertAndSend("/topic/video." + roomName, newState);
+            if(state.size() == 3){
+                String time = state.get(2);
+                msgt.convertAndSend("/topic/video." + roomName, time);
+            }
+            else {
+                msgt.convertAndSend("/topic/video." + roomName, newState);
+            }
         }
     }
 
