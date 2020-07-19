@@ -15,7 +15,15 @@ public class VideoController {
     public String convertUrlToVideoId (@RequestParam(value="url") String url){
         //return videoService.convertUrlToVideoId(url);
         return url;
+    }
 
+    @GetMapping("videoid")
+    public String getVideoRoom(@RequestParam(value="room") String roomName){
+        if(videoService.existVideo(roomName)){
+            return videoService.findVideo(roomName).get(0).getVideoId();
+        } else {
+            return "";
+        }
     }
 
 }

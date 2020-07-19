@@ -1,9 +1,20 @@
 package edu.escuelaing.arsw.streambox.entity;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class Video {
+    @Id
     private String room;
     private String url;
-    private String VideoId;
+    private String videoId;
+
+    public Video(String room, String url, String videoId){
+        this.room = room;
+        this.url = url;
+        this.videoId = videoId;
+    }
 
     public String getUrl() {
         return url;
@@ -14,11 +25,19 @@ public class Video {
     }
 
     public String getVideoId() {
-        return VideoId;
+        return videoId;
     }
 
     public void setVideoId(String videoId) {
-        VideoId = videoId;
+        this.videoId = videoId;
+    }
+
+    public String getRoom() {
+        return room;
+    }
+
+    public void setRoom(String room) {
+        this.room = room;
     }
 
 }
