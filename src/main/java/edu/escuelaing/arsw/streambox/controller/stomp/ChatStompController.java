@@ -15,6 +15,10 @@ public class ChatStompController {
     @Autowired
     SimpMessagingTemplate msgt;
 
+    /**
+     * Broadcast of messages in specific chat
+     * @param state new message in chat
+     */
     @MessageMapping("/chat")
     public void handleStateVideo(List<String> state){
         String sendMessage = state.get(0);

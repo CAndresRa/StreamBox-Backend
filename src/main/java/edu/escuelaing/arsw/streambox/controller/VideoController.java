@@ -10,13 +10,22 @@ public class VideoController {
     @Autowired
     VideoService videoService;
 
+    /**
+     * Allow callback in browsers connected
+     * @param url url of youtube video
+     * @return url of youtube video selected
+     */
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("/changeurl")
     public String convertUrlToVideoId (@RequestParam(value="url") String url){
-        //return videoService.convertUrlToVideoId(url);
         return url;
     }
 
+    /**
+     * Allow save the last video in room
+     * @param roomName name of room to endpoint
+     * @return if room exist charge video else not video ""
+     */
     @GetMapping("videoid")
     public String getVideoRoom(@RequestParam(value="room") String roomName){
         if(videoService.existVideo(roomName)){

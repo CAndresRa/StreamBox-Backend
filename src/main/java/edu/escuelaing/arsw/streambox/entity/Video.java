@@ -10,6 +10,12 @@ public class Video {
     private String url;
     private String videoId;
 
+    /**
+     * constructor
+     * @param room name of room
+     * @param url url of video
+     * @param videoId id of url video
+     */
     public Video(String room, String url, String videoId){
         this.room = room;
         this.url = url;
