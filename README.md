@@ -1,5 +1,7 @@
 # StreamBox-BackendFinal
 
+ [![CircleCI](https://circleci.com/gh/circleci/circleci-docs.svg?style=svg)](https://circleci.com/gh/CAndresRa/StreamBox-BackendFinal)
+
 # Uso
 
 Debido a que el frontend y el backend se encuentran en repositorios diferentes con despliegue independiente se recomienda para garantizar el funcionamiento correcto de la aplicación se procedera a:
@@ -49,7 +51,86 @@ Cuando se unen nuevos participantes despues del inicio del video, este solo carg
 
 * **Chat**: Se ubica en el lado derecho de la pantalla y se puede utilizar poniendo el mensaje que se desea enviar y con la tecla enter o click en **send**, el chat utiliza el nombre de usuario ingresado, en dado caso se ingrese mediante la URL de la sala se cargara automaticamente como **Anonímo**.
 
- 
- [![CircleCI](https://circleci.com/gh/circleci/circleci-docs.svg?style=svg)](https://circleci.com/gh/CAndresRa/StreamBox-BackendFinal)
+
+# Herramientas de desarrollo
+
+Para el desarrollo de StreamBox se utilizaron las siguientes herramientas.
+
+* **Maven**: Herramienta para la construccion y gestion del mismo.
+* **Lenguaje de programación**: Java, JavaScript.
+* **framework**: Spring.
+* **Desarrollo web**: React.
+* **Persitencia**: Base de datos no relacional MongoDB.
+* **Despliegue**: Heroku.
+* **Github**.
+
+# Arquitectura
+
+La arquitectura utilizada para realizar el proyecto se muestra a continuación:
 
 ![](https://github.com/CAndresRa/StreamBox-BackendFinal/blob/master/ImgReadme/ArquitecturaStreambox.png)
+
+La aplicación esta diseñada para que multiples usuarios interactuen en tiempo real con los componentes explicados anteriormente, los clientes ingresan a la pagina principal de StreamBox la cual se encuentra desplegada en **Heroku**, una vez acceden a la sala correspondiente se encuentran con los dos componentes principales **Componente Youtube** y **Componente Chat**.
+
+## Frontend
+
+### Componente Youtube:
+
+El componente Youtube se conforma de 3 partes escenciales:
+
+- **Barra de url**: Es el subcomponente que se encarga de recibir las url de videos de youtube y convertilas en un **video id** que el reproductor pueda identificar, actualmente en Youtube se manejan 3 tipos de url, a continuación se nombraran y en negrilla se encontrara señalado el id del video correspondiente.
+
+    - **URL app youtube para celular**: https://youtu.be/OzOruOeEZ4I el id se encuentra despues del ultimo **/** y corresponde a **OzOruOeEZ4I**.
+    - **URL web page simple video**: https://www.youtube.com/watch?v=S_roMeig-YQ el id se encuentra despues del **=** y corresponde a **S_roMeig-YQ**.
+    - **URL web page play list**: https://www.youtube.com/watch?v=ph6fmk27grc&list=RDph6fmk27grc&start_radio=1 el id se encuentra despues del primer **=** y antes del **&**, corresponde a **ph6fmk27grc**.
+    
+        - Cuando sucede el evento de buscar un video, el frontend se comunica con el backend de dos maneras, mediante **http** se realiza una solicitud **GET** para obtener la url del video, esto permitira un **callback** que actualizara el browser del cliente.
+        - Al mismo tiempo se realizara una comunicación vía **Websocket** el cual será el encargado de actualizar el video en la base de datos no relacional **MongoDB** y adicionalmente de realizar el broadcast hacia todos los subscriptores de la sala.
+    
+### Reproductor:
+
+Para el reproductor fue utilizada la Api de youtube llamada **YouTube Player API**, encontrara el link a continuación.
+
+[https://developers.google.com/youtube/iframe_api_reference?hl=es-419](https://developers.google.com/youtube/iframe_api_reference?hl=es-419)
+
+La API ofrecida por youtube esta orientada para aportar una forma a los desarrolladores de **Incrustar (Embeber)** su reproductor en paginas externas a Youtube con el fin de enriquecer paginas web o aplicaciones que consuman este servicio. Adicionalmente esta API cuenta con instrucciones detalladas de metodos que permiten conocer y controlar el **estado del video, tiempo actual en el reproductor y actualizar el tiempo del video**.
+
+* **Estados del video**:
+    - -1 - unstarted (sin empezar)
+    - 0 - ended (terminado)
+    - 1 - playing (en reproducción)
+    - 2 - paused (en pausa)
+    - 3 - buffering (almacenando en búfer)
+    - 5 - video cued (video en fila)
+  
+* **Metodos importantes**:
+
+    - `player.getCurrentTime():Number` Tiempo actual del video
+    - `player.playVideo():Void` Reproducir video
+    - `player.pauseVideo():Void` Pausar Video
+    - `player.seekTo(seconds:Number, allowSeekAhead:Boolean):Void` Actualizar minuto del video
+    - `player.getPlayerState():Number` Obtener estado del video
+
+* **Implementación**:
+
+La API de Youtube da un formato para aplicar el componente en JavaScript, sin embargo para la implementación en **React** existe una libreria que utiliza implementa la API llamada **react-youtube**, en terminos generales ofrece el mismo esquema de Youtube API y permite utilizar todos los metodos de la API sin diferencia alguna.
+
+```       
+          <YouTube
+            videoId = {this.state.videoId}
+            opts = {opts}
+            onReady = {this.videoOnReady}
+            onStateChange = {this.videoOnStateChange}
+            getCurrentTime = {this.getCurrentTime}
+            onPlay = { this.onPlay }
+            onPause = { this.onPause }
+          />
+```
+
+En la implementación anterior desde el tag Youtube y con ayuda de la API de Youtube ponemos a escuchar eventos particulares que ocurran en el mismo y se ligan a una funcion - metodo, particular que se encargara de tomar acciones respectivas a los cambios ocurridos.
+
+
+- **Boton de sincronización**
+
+
+
