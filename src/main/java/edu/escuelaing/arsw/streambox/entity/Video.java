@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Video {
     @Id
     private String room;
+
     private String url;
     private String videoId;
 

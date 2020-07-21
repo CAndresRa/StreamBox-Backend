@@ -34,4 +34,12 @@ public interface VideoService {
      */
     Boolean existVideo(String roomName);
 
+    /**
+     * Delete video of database
+     * @param roomName name of room
+     */
+    void deleteVideo(String roomName);
+
+
+
 }

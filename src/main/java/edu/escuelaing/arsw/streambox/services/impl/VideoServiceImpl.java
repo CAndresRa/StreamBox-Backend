@@ -16,13 +16,20 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     public String convertUrlToVideoId(String url) {
-        String[] link = url.split("=");
-        if(link[1].contains("&")){
-            String[] temp = url.split("&");
-            return temp[0];
-        }
-        else {
-            return link[1];
+        if(url.contains("=")) {
+            //url web page
+            String[] link = url.split("=");
+            if (!url.contains("&")) {
+                return link[1];
+            } else {
+
+                String[] lastSplit = link[1].split("&");
+                return lastSplit[0];
+            }
+        } else{
+            //url of mobile
+            String[] link = url.split("/");
+            return link[3];
         }
     }
 
@@ -40,6 +47,11 @@ public class VideoServiceImpl implements VideoService {
     @Override
     public Boolean existVideo(String roomName) {
         return videoRoomRepository.existsById(roomName);
+    }
+
+    @Override
+    public void deleteVideo(String roomName) {
+        videoRoomRepository.deleteById(roomName);
     }
 
 }
