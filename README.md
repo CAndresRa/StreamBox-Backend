@@ -49,7 +49,7 @@ Se encontraran los siguentes componentes en la vista.
 
 Cuando se unen nuevos participantes despues del inicio del video, este solo cargara el video en el reproductor, así que la persona que se encuentra en el minuto correspondiente debera utilizar el boton **Synchronize** para que los nuevos participantes en la sala se emparejen con el resto.
 
-* **Chat**: Se ubica en el lado derecho de la pantalla y se puede utilizar poniendo el mensaje que se desea enviar y con la tecla enter o click en **send**, el chat utiliza el nombre de usuario ingresado, en dado caso se ingrese mediante la URL de la sala se cargara automaticamente como **Anonímo**.
+* **Chat**: Se ubica en el lado derecho de la pantalla y se puede utilizar poniendo el mensaje que se desea enviar y con la tecla enter o click en **send**, el chat utiliza el nombre de usuario ingresado, en dado caso se ingrese mediante la URL de la sala se cargara automaticamente como **Anónimo**.
 
 
 # Herramientas de desarrollo
@@ -58,7 +58,7 @@ Para el desarrollo de StreamBox se utilizaron las siguientes herramientas.
 
 * **Maven**: Herramienta para la construccion y gestion del mismo.
 * **Lenguaje de programación**: Java, JavaScript.
-* **framework**: Spring.
+* **Framework**: Spring.
 * **Desarrollo web**: React.
 * **Persitencia**: Base de datos no relacional MongoDB.
 * **Despliegue**: Heroku.
@@ -127,10 +127,19 @@ La API de Youtube da un formato para aplicar el componente en JavaScript, sin em
           />
 ```
 
-En la implementación anterior desde el tag Youtube y con ayuda de la API de Youtube ponemos a escuchar eventos particulares que ocurran en el mismo y se ligan a una funcion - metodo, particular que se encargara de tomar acciones respectivas a los cambios ocurridos.
+En la implementación anterior desde el **tag Youtube** y con ayuda de la API de Youtube ponemos a escuchar eventos particulares que ocurran en el mismo y se ligan a una funcion - metodo, particular que se encargara de tomar acciones respectivas a los cambios ocurridos.
 
 
 - **Boton de sincronización**
+
+El boton de **Synchronize** permite una sincronización manual por parte de los participantes en caso de algun error en la sincronización, este boton activa el metodo `player.seekTo(seconds:Number, allowSeekAhead:Boolean):Void` en el reproductor, el cual envia al servidor el tiempo actual del video, el servidor realiza el broadcast sobre todos los subscriptores y ubica el video en el minuto correspondiente.
+
+### Componente Chat:
+
+A la derecha de la pantalla encontramos el componente del chat, el cual cuenta con el nombre de la sala y utiliza el nombre con el que ingreso a la sala, en dado caso que se ingrese a la sala mediante el link correspondiente el usuario se cargara como **Anónimo**, el componente intactua con el servidor enviando mensajes, el servidor realiza el broadcast correspondiente a los miembros subscritos en la sala.
+
+
+## Backend
 
 
 
