@@ -1,6 +1,7 @@
 # StreamBox-BackendFinal
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/24e50e3f04e5474ea1ef70eef2c273fc)](https://app.codacy.com/manual/CAndresRa/StreamBox-BackendFinal?utm_source=github.com&utm_medium=referral&utm_content=CAndresRa/StreamBox-BackendFinal&utm_campaign=Badge_Grade_Dashboard)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/24e50e3f04e5474ea1ef70eef2c273fc)](https://app.codacy.com/manual/CAndresRa/StreamBox-BackendFinal?utm_source=github.com&utm_medium=referral&utm_content=CAndresRa/StreamBox-BackendFinal&utm_campaign=Badge_Grade_Dashboard)
  [![CircleCI](https://circleci.com/gh/circleci/circleci-docs.svg?style=svg)](https://circleci.com/gh/CAndresRa/StreamBox-BackendFinal)
 
 # Uso
