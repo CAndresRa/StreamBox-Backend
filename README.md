@@ -145,9 +145,32 @@ A la derecha de la pantalla encontramos el componente del chat, el cual cuenta c
 
 ![](https://github.com/CAndresRa/StreamBox-BackendFinal/blob/master/ImgReadme/Digrama%20de%20clase.png)
 
-### Pruebas 
+Nos enfocaremos en describir el comportamiento del backend para lograr la sincronización y el manejo de los videos, mediante el uso de Stomp se realiza la conexion al endpoint websocket de nuestro servidor, a continuación las solicitudes que vienen desde el cliente son recibidas por la clase **VideoStompController** y **VideoController**, cuando ocurre una petición de cambiar el video, mediante la clase de **VideoStompController** se actualiza por el nombre de la sala en la base de datos **MongoDB**, esto genera que cuando existan nuevas conexiones al endpoint de la sala correspondiente, se realice la solicitud a **VideoController** para obtener el ultimo video visto en la sala. Se evidencia claramente que las operaciones correspondientes al video son responsabilidad de la interface **VideoService** que es implementada por **VideoServiceImpl** la cual se conecta con el **VideoRoomRepository** para la parte de persistencia, por otra parte el diseño del **ChatStompController** es una implementación que se encarga plenamente de recibir los nuevos mensajes y entregalos a los subscriptores correspondientes.
+
+## Patrones de diseño 
+
+![](https://github.com/CAndresRa/StreamBox-BackendFinal/blob/master/ImgReadme/publishSubs.png)
+
+### Publish - Subscribe 
+
+[Diferencia entre patron del observador y publish-subscribe](https://hackernoon.com/observer-vs-pub-sub-pattern-50d3b27f838c)
+
+Para la implementación de la aplicación se utiliza el patron de diseño publish-subscribe, este patron involucra un intermediario **MessageBroker** en el canal de comunicación entre el publish y los subscriptores que se encuentran en el canal, el canal se ve representado en la imagen de arquitectura como el endpoint a un websocket que contiene topicos especificos.
+
+
+## Pruebas 
+
+Se utilizaron pruebas unitaras JUnit que buscaban probar los metodos utilizados en las interraciones del video, algunas de estas pruebas se orientaron a la:
+
+* Obtención del video Id dada cualquier URL.
+* Manejo del servicio correspondiente al video.
+* Manejo de la persistencia y actualizacion en la base de datos 
+
+A continuacion se muestran las pruebas implementadas:
 
 ![](https://github.com/CAndresRa/StreamBox-BackendFinal/blob/master/ImgReadme/Test.png)
+
+Como se utiliza MVN como gestor del proyecto mediante el comando `mvn test`obtenemos el resultado que se muestra a continuación.
 
 ![](https://github.com/CAndresRa/StreamBox-BackendFinal/blob/master/ImgReadme/mvn%20test.png)
 
