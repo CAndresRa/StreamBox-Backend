@@ -16,7 +16,7 @@ Debido a que el frontend y el backend se encuentran en repositorios diferentes c
   
 Una vez ingresemos a la pagina web nos encontraremos con la siguiente vista que corresponde a la pagina principal de StreamBox.
 
-![]()
+![](https://github.com/CAndresRa/StreamBox-BackendFinal/blob/master/ImgReadme/PaginaPrincipal.png)
 
 Para acceder a una sala se deben llenar los siguientes campos
 
@@ -25,7 +25,7 @@ Para acceder a una sala se deben llenar los siguientes campos
 
 A continuacíon se une a la sala respectiva la cual tiene la siguiente vista:
 
-![]()
+![](https://github.com/CAndresRa/StreamBox-BackendFinal/blob/master/ImgReadme/Room.png)
 
 Se encontraran los siguentes componentes en la vista.
 
@@ -78,14 +78,16 @@ La aplicación esta diseñada para que multiples usuarios interactuen en tiempo 
 
 El componente Youtube se conforma de 3 partes escenciales:
 
-- **Barra de url**: Es el subcomponente que se encarga de recibir las url de videos de youtube y convertilas en un **video id** que el reproductor pueda identificar, actualmente en Youtube se manejan 3 tipos de url, a continuación se nombraran y en negrilla se encontrara señalado el id del video correspondiente.
+### Barra de url:
 
-    - **URL app youtube para celular**: https://youtu.be/OzOruOeEZ4I el id se encuentra despues del ultimo **/** y corresponde a **OzOruOeEZ4I**.
-    - **URL web page simple video**: https://www.youtube.com/watch?v=S_roMeig-YQ el id se encuentra despues del **=** y corresponde a **S_roMeig-YQ**.
-    - **URL web page play list**: https://www.youtube.com/watch?v=ph6fmk27grc&list=RDph6fmk27grc&start_radio=1 el id se encuentra despues del primer **=** y antes del **&**, corresponde a **ph6fmk27grc**.
+Es el subcomponente que se encarga de recibir las url de videos de youtube y convertilas en un **video id** que el reproductor pueda identificar, actualmente en Youtube se manejan 3 tipos de url, a continuación se nombraran y en negrilla se encontrara señalado el id del video correspondiente.
+
+- **URL app youtube para celular**: https://youtu.be/OzOruOeEZ4I el id se encuentra despues del ultimo **/** y corresponde a **OzOruOeEZ4I**.
+- **URL web page simple video**: https://www.youtube.com/watch?v=S_roMeig-YQ el id se encuentra despues del **=** y corresponde a **S_roMeig-YQ**.
+- **URL web page play list**: https://www.youtube.com/watch?v=ph6fmk27grc&list=RDph6fmk27grc&start_radio=1 el id se encuentra despues del primer **=** y antes del **&**, corresponde a **ph6fmk27grc**.
     
-        - Cuando sucede el evento de buscar un video, el frontend se comunica con el backend de dos maneras, mediante **http** se realiza una solicitud **GET** para obtener la url del video, esto permitira un **callback** que actualizara el browser del cliente.
-        - Al mismo tiempo se realizara una comunicación vía **Websocket** el cual será el encargado de actualizar el video en la base de datos no relacional **MongoDB** y adicionalmente de realizar el broadcast hacia todos los subscriptores de la sala.
+    - Cuando sucede el evento de buscar un video, el frontend se comunica con el backend de dos maneras, mediante **http** se realiza una solicitud **GET** para obtener la url del video, esto permitira un **callback** que actualizara el browser del cliente.
+    - Al mismo tiempo se realizara una comunicación vía **Websocket** el cual será el encargado de actualizar el video en la base de datos no relacional **MongoDB** y adicionalmente de realizar el broadcast hacia todos los subscriptores de la sala.
     
 ### Reproductor:
 
@@ -130,7 +132,7 @@ La API de Youtube da un formato para aplicar el componente en JavaScript, sin em
 En la implementación anterior desde el **tag Youtube** y con ayuda de la API de Youtube ponemos a escuchar eventos particulares que ocurran en el mismo y se ligan a una funcion - metodo, particular que se encargara de tomar acciones respectivas a los cambios ocurridos.
 
 
-- **Boton de sincronización**
+### Boton de sincronización
 
 El boton de **Synchronize** permite una sincronización manual por parte de los participantes en caso de algun error en la sincronización, este boton activa el metodo `player.seekTo(seconds:Number, allowSeekAhead:Boolean):Void` en el reproductor, el cual envia al servidor el tiempo actual del video, el servidor realiza el broadcast sobre todos los subscriptores y ubica el video en el minuto correspondiente.
 
@@ -140,6 +142,15 @@ A la derecha de la pantalla encontramos el componente del chat, el cual cuenta c
 
 
 ## Backend
+
+![](https://github.com/CAndresRa/StreamBox-BackendFinal/blob/master/ImgReadme/Digrama%20de%20clase.png)
+
+### Pruebas 
+
+![](https://github.com/CAndresRa/StreamBox-BackendFinal/blob/master/ImgReadme/Test.png)
+
+![](https://github.com/CAndresRa/StreamBox-BackendFinal/blob/master/ImgReadme/mvn%20test.png)
+
 
 
 
