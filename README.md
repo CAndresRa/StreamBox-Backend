@@ -174,6 +174,9 @@ Como se utiliza MVN como gestor del proyecto mediante el comando `mvn test`obten
 
 ![](https://github.com/CAndresRa/StreamBox-BackendFinal/blob/master/ImgReadme/mvn%20test.png)
 
+## Trello 
+
+https://trello.com/b/xSJo30kL/casos-de-uso-streambox
 
 
 
